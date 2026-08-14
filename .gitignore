@@ -75,8 +75,12 @@ text-information-boundary/
 # ========== 测试 SDK 项目 ==========
 test-sdk57/
 
-# ========== 隧道与临时工具 ==========
-tools/
+# ========== 隧道工具脚本（保留脚本，排除二进制和临时文件） ==========
+tools/_*.log
+tools/_*.out
+tools/_*.txt
+tools/_*.tmp
+tools/cloudflared.exe
 kg_mem/
 docs/
 .superpowers/

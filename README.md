@@ -8,6 +8,77 @@ Atrium OS 是一款以**隐私优先**为核心设计原则的 AI 日记应用�
 
 系统内置三个独立人格的 AI 角色（鳄正经、鹅小弟、鹿晓葵），通过**冲动值调度系统**模拟真实群聊节奏。同时提供日记情绪分析、实体管理、觉察报告、联网搜索等能力。
 
+## 快速开始
+
+### 方式一：直接下载 APK 安装（推荐）
+
+1. 前往 [Releases 页面](https://github.com/author9527/Atrium_OS_V1.0/releases) 下载最新的 `atriumos-fixed.apk`
+2. 将 APK 传输到手机（微信/USB/云盘均可）
+3. 在手机上点击安装（需开启"允许安装未知来源应用"）
+4. 安装完成后打开 Atrium OS，进入 **设置** 页面配置 LLM 服务地址（见下方隧道教程）
+
+### 方式二：从源码构建
+
+```bash
+cd mobile
+npm install
+# 构建 APK（需要 EAS 账号）
+eas build --profile preview --platform android
+# 或本地构建
+npx expo prebuild --platform android
+cd android && ./gradlew assembleRelease
+```
+
+## 连接手机到电脑上的 Ollama（Cloudflare 隧道教程）
+
+Atrium OS 手机端需要连接 LLM 服务进行 AI 对话。如果你在电脑上运行了 Ollama，可以通过 Cloudflare 快速隧道让手机通过公网访问电脑上的 Ollama，无需公网 IP，无需路由器配置。
+
+### 前置准备
+
+1. **安装 Ollama**：访问 [ollama.com](https://ollama.com) 下载安装，然后拉取模型：
+   ```bash
+   ollama pull qwen3:8b
+   ollama serve
+   ```
+
+2. **下载 cloudflared**：从 [Cloudflare 官方](https://github.com/cloudflare/cloudflared/releases/latest) 下载 `cloudflared-windows-amd64.exe`，重命名为 `cloudflared.exe`，放入项目的 `tools/` 目录下。
+
+### 一键启动隧道
+
+双击运行 `tools/一键启动公网隧道.bat`，脚本会自动完成以下操作：
+
+```
+[1/4] 检查 Ollama (端口 11434) ...        ← 自动启动 Ollama（如未运行）
+[2/4] 检查 SearXNG (端口 8888) ...         ← 自动启动 SearXNG（如未运行）
+[3/4] 启动 Cloudflare 公网隧道 ...         ← 创建两条临时公网隧道
+[4/4] 完成!
+```
+
+脚本运行后，终端会输出两个公网地址：
+
+```
+Ollama URL:  https://xxxx-xxxx-xxxx.trycloudflare.com
+SearXNG URL: https://yyyy-yyyy-yyyy.trycloudflare.com
+```
+
+Ollama 地址会自动复制到剪贴板。
+
+### 在手机端配置
+
+1. 打开 Atrium OS App
+2. 进入 **设置** 页面
+3. 将 Ollama URL 粘贴到 **Ollama 地址** 输入框（去掉末尾的 `/api/tags` 等路径，只保留 `https://xxxx.trycloudflare.com`）
+4. 将 SearXNG URL 粘贴到 **搜索服务地址** 输入框（可选，用于联网搜索功能）
+5. 返回主界面，开始对话
+
+### 注意事项
+
+- 每次启动隧道，公网地址都会变化，需要在 App 中更新
+- 隧道依赖 Cloudflare 免费快速隧道服务，无需注册账号
+- 保持隧道脚本窗口打开，关闭窗口则隧道断开
+- 电脑休眠或关机后隧道失效，需重新运行脚本
+- 如果仅需在局域网内使用，手机和电脑连同一 WiFi，直接填电脑局域网 IP 即可（如 `http://192.168.1.100:11434`）
+
 ## 核心特性
 
 ### 多 Agent 冲动值发言调度
@@ -20,7 +91,7 @@ Atrium OS 是一款以**隐私优先**为核心设计原则的 AI 日记应用�
 
 ### 合并分析优化
 
-日记的摘要 + 主导情绪 + 8 维情绪向量（基于普拉奇克情绪轮理论）三项分析合并为一次结构化 JSON LLM 调用，相比三次独立调用速度提升约 36%。
+日记的摘要 + 主导情绪 + 8 维情绪向量（基于普拉切克情绪轮理论）三项分析合并为一次结构化 JSON LLM 调用，相比三次独立调用速度提升约 36%。
 
 ### 智能实体管理器
 
@@ -49,6 +120,7 @@ Atrium OS 是一款以**隐私优先**为核心设计原则的 AI 日记应用�
 | 后端服务 | Python + FastAPI + SQLite |
 | 桌面端 | React + Vite + Tailwind CSS (Electron) |
 | 加密 | scrypt + AES-GCM |
+| 公网穿透 | Cloudflare Quick Tunnel |
 
 ## 项目结构
 
@@ -92,43 +164,15 @@ Atrium_OS_V1.0/
 ├── storage/                    # 数据存储层
 │   ├── diary_storage.py        # 日记存储
 │   └── core_storage.py         # 实体/关系存储
+├── tools/                      # 公网隧道工具
+│   ├── 一键启动公网隧道.bat      # 一键启动 Ollama + SearXNG + Cloudflare 隧道
+│   ├── start_ollama_tunnel.bat  # 单独启动隧道
+│   └── _ollama_tunnel_helper.ps1 # 隧道辅助脚本
 ├── UI/                         # 桌面端前端 (React + Vite)
-├── tests/                      # 测试
 ├── searxng/                    # SearXNG 部署脚本
+├── tests/                      # 测试
 ├── requirements.txt            # Python 依赖
 └── start_server.py             # 后端启动脚本
-```
-
-## 快速开始
-
-### 手机端（核心）
-
-```bash
-cd mobile
-npm install
-
-# 启动开发服务器
-npx expo start
-```
-
-**LLM 后端（二选一）：**
-
-- **Ollama（推荐）**：安装 [Ollama](https://ollama.com)，拉取模型后运行 `ollama serve`
-- **OpenRouter**：在 App 设置中配置 API Key
-
-### Python 后端（可选，桌面端使用）
-
-```bash
-pip install -r requirements.txt
-python start_server.py
-```
-
-### 桌面端（可选）
-
-```bash
-cd UI
-npm install
-npm run dev
 ```
 
 ## 架构设计
