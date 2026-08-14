@@ -1,0 +1,21 @@
+# Atrium OS - Python 后端依赖
+# 安装：pip install -r requirements.txt
+
+# Web 框架
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+
+# 数据验证
+pydantic>=2.0.0
+
+# HTTP 请求
+requests>=2.32.0
+
+# 加密（备份与认证）
+cryptography>=42.0.0
+
+# 向量数据库（共情引擎语义检索，可选）
+chromadb>=0.5.0
+
+# 图数据库（共情引擎知识图谱，可选）
+neo4j>=5.0.0

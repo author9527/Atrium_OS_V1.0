@@ -1,0 +1,50 @@
+{
+  "name": "atrium-os-mobile",
+  "version": "1.0.0",
+  "main": "expo-router/entry",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@expo/vector-icons": "^15.0.2",
+    "@noble/ciphers": "^2.3.0",
+    "@noble/hashes": "^2.3.0",
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "@scure/base": "^2.3.0",
+    "expo": "~57.0.10",
+    "expo-asset": "~57.0.8",
+    "expo-build-properties": "~57.0.8",
+    "expo-constants": "~57.0.9",
+    "expo-document-picker": "~57.0.1",
+    "expo-file-system": "~57.0.2",
+    "expo-font": "~57.0.1",
+    "expo-linking": "~57.0.5",
+    "expo-router": "~57.0.10",
+    "expo-sharing": "~57.0.10",
+    "expo-sqlite": "~57.0.1",
+    "expo-status-bar": "~57.0.1",
+    "expo-system-ui": "~57.0.2",
+    "promise": "^8.3.0",
+    "punycode": "^2.3.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "~0.86.2",
+    "react-native-gesture-handler": "~2.32.0",
+    "react-native-markdown-display": "^7.0.2",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-screens": "~4.26.0",
+    "react-native-web": "^0.21.2",
+    "react-native-webview": "13.16.1"
+  },
+  "devDependencies": {
+    "@babel/traverse": "^7.29.8",
+    "@expo/cli": "^57.0.12",
+    "@types/react": "~19.2.4",
+    "typescript": "~6.0.3"
+  },
+  "private": true,
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}

@@ -1,0 +1,133 @@
+# ========== Python ==========
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# ========== Node.js ==========
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ========== 前端构建产物 ==========
+UI/release/
+UI/dist/
+
+# ========== Expo / React Native ==========
+.expo/
+.web-build/
+dist-check/
+.verify-export/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# ========== Android 构建产物 ==========
+*.apk
+*.apk.idsig
+*.aab
+index.android.bundle
+index.android.bundle.*
+android/local.properties
+android/.gradle/
+android/app/build/
+android/build/
+
+# ========== 数据库与运行时数据 ==========
+*.db
+*.db-shm
+*.db-wal
+data/
+brain_arch/
+brain_arch_legacy/
+
+# ========== SDK 与工具链（体积过大，不纳入版本控制） ==========
+android-sdk/
+jdk17/
+jdk21/
+jdk21.zip
+*.tar.gz
+
+# ========== 第三方源码与库 ==========
+searxng/searxng-src/
+searxng/searxng-master.tar.gz
+lib/
+
+# ========== 设计文档与报告（非源码） ==========
+.trae-html-share-packages/
+atrium-architecture-audit/
+atrium-data-architecture/
+atrium-final-design/
+atrium-os-proposal/
+atrium-product-strategy/
+ai-prompts-inventory/
+diary-apps-export/
+memory-framework-analysis/
+text-information-boundary/
+
+# ========== 测试 SDK 项目 ==========
+test-sdk57/
+
+# ========== 隧道与临时工具 ==========
+tools/
+kg_mem/
+docs/
+.superpowers/
+convert-*.md
+*.log
+*.tmp
+
+# ========== 个人文件 ==========
+photo.jpg
+resume-wutian.html
+*.pdf
+
+# ========== 运行时配置与数据（代码会自动生成） ==========
+entity_registry.json
+kg_memory_brain.json
+short_term_history.json
+consolidation_anchor.json
+insight_results*.json
+atrium_settings.json
+persona_config.json
+_build_info.json
+build_log.txt
+
+# ========== 临时报告 ==========
+EVENT_EXTRACTOR_TEST_REPORT.md
+bug_report.md
+forum_post.md
+prompts_inventory.md
+prompts_review.md
+security_best_practices_report.md
+
+# ========== 冗余依赖文件 ==========
+requirements_searxng-venv.txt
+requirements_venv.txt
+
+# ========== IDE / 编辑器 ==========
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ========== 操作系统 ==========
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ========== 环境变量 ==========
+.env
+.env.*
+*.local
+
+# ========== SearXNG 运行时 ==========
+searxng/searx/

@@ -1,0 +1,114 @@
+{
+  "name": "atrium-os",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Atrium OS — 个人记忆操作系统",
+  "author": "Atrium",
+  "main": "electron/main.cjs",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "dev:electron": "concurrently \"vite\" \"wait-on http://localhost:5173 && electron .\"",
+    "build:electron": "vite build && electron-builder",
+    "build:electron:dir": "vite build && electron-builder --dir"
+  },
+  "build": {
+    "appId": "com.atrium.os",
+    "productName": "Atrium OS",
+    "directories": {
+      "output": "c:/users/wt111/.trae-cn/work/6a62383e97f372e6160b6ea8/atrium-release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "../server",
+        "to": "backend/server"
+      },
+      {
+        "from": "../ai",
+        "to": "backend/ai"
+      },
+      {
+        "from": "../storage",
+        "to": "backend/storage"
+      },
+      {
+        "from": "../data",
+        "to": "backend/data"
+      },
+      {
+        "from": "../brain_arch",
+        "to": "backend/brain_arch"
+      },
+      {
+        "from": "../start_server.py",
+        "to": "backend/start_server.py"
+      },
+      {
+        "from": "../consolidation.py",
+        "to": "backend/consolidation.py"
+      },
+      {
+        "from": "../index_cache.py",
+        "to": "backend/index_cache.py"
+      },
+      {
+        "from": "../unified_npc_store.py",
+        "to": "backend/unified_npc_store.py"
+      },
+      {
+        "from": "../requirements.txt",
+        "to": "backend/requirements.txt"
+      }
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "public/favicon.svg"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "dependencies": {
+    "@tiptap/extension-color": "^3.28.0",
+    "@tiptap/extension-image": "^3.28.0",
+    "@tiptap/extension-text-style": "^3.28.0",
+    "@tiptap/extension-underline": "^3.28.0",
+    "@tiptap/react": "^3.28.0",
+    "@tiptap/starter-kit": "^3.28.0",
+    "lucide-react": "^1.14.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@tailwindcss/postcss": "^4.2.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "autoprefixer": "^10.4.27",
+    "concurrently": "^9.2.1",
+    "electron": "^43.2.0",
+    "electron-builder": "^26.15.3",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.4.0",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^4.2.2",
+    "vite": "^8.0.1",
+    "wait-on": "^9.0.3"
+  }
+}
